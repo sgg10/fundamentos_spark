@@ -31,7 +31,7 @@ services:
  #   environment:
  #     - "SPARK_MASTER=spark://spark-master:7077"
  spark-jupyter:
-  image: jupyter/pyspark-notebook
+  image: jupyter/all-spark-notebook
   container_name: spark-jupyter
   ports:
    - '4040-4050:4040-4050'
