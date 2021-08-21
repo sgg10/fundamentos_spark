@@ -50,6 +50,15 @@ def get_schemas():
             StructField("deportista_id", IntegerType(), False),
             StructField("juego_id", IntegerType(), False),
             StructField("evento_id", IntegerType(), False)
+        ]),
+        "deportista_error": StructType([
+            StructField("deportista_id", StringType(), False),
+            StructField("nombre", StringType(), False),
+            StructField("genero", StringType(), False),
+            StructField("edad", StringType(), False),
+            StructField("altura", StringType(), False),
+            StructField("peso", StringType(), False),
+            StructField("equipo_id", StringType(), False)
         ])
     }
 
@@ -63,7 +72,8 @@ def load_dataframes_from_schemas(sql_context, schemas=get_schemas()):
         "evento": sql_context.read.schema(schemas['evento']).option("header", "true").csv(f"{data_dir}/evento.csv"),
         "juegos": sql_context.read.schema(schemas['juegos']).option("header", "true").csv(f"{data_dir}/juegos.csv"),
         "paises": sql_context.read.schema(schemas['paises']).option("header", "true").csv(f"{data_dir}/paises.csv"),
-        "resultados": sql_context.read.schema(schemas['resultados']).option("header", "true").csv(f"{data_dir}/resultados.csv")
+        "resultados": sql_context.read.schema(schemas['resultados']).option("header", "true").csv(f"{data_dir}/resultados.csv"),
+        "deportista_error": sql_context.read.option("header", "true").csv(f"{data_dir}/deportistaError.csv", schema=schemas['deportista_error'])
     }
     del(dp1, dp2)
 
